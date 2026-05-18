@@ -18,6 +18,10 @@ export const siteConfig = {
   manufacturer: "Shri Balaji Gul Udyog",
   fssai: "21524084003483",
   iso: "ISO 9001:2015 Certified Company",
+  social: {
+    facebook:
+      "https://www.facebook.com/share/1BVxKddZuM/?mibextid=wwXIfr",
+  },
 } as const;
 
 export const brandHighlights = [

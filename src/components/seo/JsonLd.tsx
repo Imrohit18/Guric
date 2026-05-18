@@ -19,7 +19,7 @@ export function OrganizationJsonLd() {
       postalCode: siteConfig.address.postalCode,
       addressCountry: siteConfig.address.country,
     },
-    sameAs: [],
+    sameAs: [siteConfig.social.facebook],
   };
 
   return (

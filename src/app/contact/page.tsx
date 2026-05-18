@@ -50,6 +50,19 @@ export default function ContactPage() {
                 {siteConfig.address.city}, {siteConfig.address.state} — {siteConfig.address.postalCode}
               </p>
             </div>
+            <div>
+              <h2 className="text-sm font-semibold uppercase tracking-wider text-guric-leaf">
+                Social
+              </h2>
+              <a
+                href={siteConfig.social.facebook}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-2 inline-flex items-center gap-2 text-lg font-semibold text-guric-green hover:underline"
+              >
+                Follow us on Facebook
+              </a>
+            </div>
             <div className="flex flex-wrap gap-2 pt-2">
               <span className="rounded-full bg-guric-cream px-3 py-1 text-xs font-medium">
                 FSSAI {siteConfig.fssai}
