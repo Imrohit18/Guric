@@ -10,13 +10,13 @@ Production-ready marketing website for **Guric** ([guric.in](https://guric.in)) 
 
 ## Contact form (email)
 
-Enquiries are sent to **guricbusiness@gmail.com** via Gmail SMTP.
+Enquiries are sent to **guricbusiness@gmail.com**.
 
-1. Copy `.env.example` to `.env.local`
-2. Enable 2-Step Verification on `guricbusiness@gmail.com`
-3. Create an [App Password](https://myaccount.google.com/apppasswords) (Google Account → Security)
-4. Set `SMTP_USER` and `SMTP_PASS` in `.env.local`
-5. On Vercel/hosting, add the same variables under Environment Variables
+**Option A — Gmail SMTP** (see `.env.example`): set `SMTP_USER` and `SMTP_PASS` (Google [App Password](https://myaccount.google.com/apppasswords)).
+
+**Option B — Web3Forms** (simple on Vercel): sign up at [web3forms.com](https://web3forms.com), set `WEB3FORMS_ACCESS_KEY` in env vars.
+
+WhatsApp chat button uses **+91 9890323186** on every page.
 
 ## Development
 

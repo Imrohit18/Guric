@@ -42,12 +42,12 @@ export default function AboutPage() {
                 </li>
               </ul>
             </div>
-            <div className="relative aspect-video overflow-hidden rounded-2xl shadow-lg">
+            <div className="relative aspect-video w-full max-w-full overflow-hidden rounded-2xl shadow-lg">
               <Image
                 src="/images/label-jaggery-powder.png"
                 alt="Guric pure jaggery brand"
                 fill
-                className="object-cover"
+                className="h-full w-full max-w-full object-contain object-center"
                 sizes="(max-width: 1024px) 100vw, 50vw"
               />
             </div>

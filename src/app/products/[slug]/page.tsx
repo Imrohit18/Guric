@@ -1,6 +1,6 @@
-import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { ProductImage } from "@/components/products/ProductImage";
 import { ProductJsonLd } from "@/components/seo/JsonLd";
 import { getProductBySlug, products, tierLabels } from "@/data/products";
 import { createMetadata } from "@/lib/seo";
@@ -48,25 +48,21 @@ export default async function ProductPage({
         className="border-b border-guric-cream-dark py-12 sm:py-16"
         style={{ background: `linear-gradient(135deg, ${product.accentColor}12, var(--guric-cream))` }}
       >
-        <div className="mx-auto grid max-w-7xl items-center gap-10 px-4 sm:px-6 lg:grid-cols-2 lg:gap-16 lg:px-8">
-          <div className="relative aspect-square overflow-hidden rounded-2xl bg-white shadow-lg">
-            <Image
-              src={product.image}
-              alt={product.name}
-              fill
-              className="object-contain p-4"
-              priority
-              sizes="(max-width: 1024px) 100vw, 50vw"
-            />
-          </div>
-          <div>
+        <div className="mx-auto grid max-w-7xl items-center gap-8 px-4 sm:gap-10 sm:px-6 lg:grid-cols-2 lg:gap-16 lg:px-8">
+          <ProductImage
+            src={product.image}
+            alt={product.name}
+            variant="detail"
+            priority
+          />
+          <div className="min-w-0">
             <span
               className="inline-block rounded-full px-3 py-1 text-xs font-bold text-white"
               style={{ backgroundColor: product.accentColor }}
             >
               {tierLabels[product.tier]}
             </span>
-            <h1 className="mt-3 font-display text-3xl font-bold text-guric-green sm:text-4xl lg:text-5xl">
+            <h1 className="mt-3 font-display text-2xl font-bold text-guric-green sm:text-4xl lg:text-5xl">
               {product.name}
             </h1>
             {product.hindiName && (
@@ -76,7 +72,7 @@ export default async function ProductPage({
             <p className="mt-5 leading-relaxed text-guric-brown/85">{product.description}</p>
             <Link
               href="/contact"
-              className="mt-8 inline-flex rounded-full bg-guric-green px-8 py-3.5 text-sm font-semibold text-white shadow transition hover:bg-guric-green-dark"
+              className="mt-8 inline-flex min-h-[48px] items-center justify-center rounded-full bg-guric-green px-6 py-3.5 text-sm font-semibold text-white shadow transition hover:bg-guric-green-dark sm:px-8"
             >
               Enquire for Retail / Bulk
             </Link>
@@ -85,7 +81,7 @@ export default async function ProductPage({
       </section>
 
       <section className="section-padding">
-        <div className="mx-auto grid max-w-7xl gap-12 px-4 sm:px-6 lg:grid-cols-3 lg:gap-16 lg:px-8">
+        <div className="mx-auto grid w-full max-w-7xl gap-10 px-4 sm:gap-12 sm:px-6 lg:grid-cols-3 lg:gap-16 lg:px-8">
           <div className="lg:col-span-2 space-y-10">
             <div>
               <h2 className="font-display text-2xl font-bold text-guric-green">Uses</h2>

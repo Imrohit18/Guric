@@ -20,7 +20,7 @@ export default function ContactPage() {
           description="We welcome partnerships with retailers, distributors, and premium food stores across India."
         />
 
-        <div className="mt-12 grid gap-8 lg:grid-cols-2">
+        <div className="mt-10 grid grid-cols-1 gap-8 lg:mt-12 lg:grid-cols-2">
           <div className="space-y-6 rounded-2xl border border-guric-cream-dark bg-white p-8 shadow-sm">
             <div>
               <h2 className="text-sm font-semibold uppercase tracking-wider text-guric-leaf">Phone</h2>

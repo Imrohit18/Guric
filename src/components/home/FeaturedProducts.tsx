@@ -16,7 +16,7 @@ export function FeaturedProducts() {
           description="Nature's sweetness, pure & wholesome — powder, chocolate ghee, adrak ghee, ilaichi ghee, and desi ghee cubes."
         />
         <ProductLineup />
-        <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
+        <div className="product-grid mt-10 sm:mt-12">
           {featured.map((product) => (
             <ProductCard key={product.slug} product={product} />
           ))}

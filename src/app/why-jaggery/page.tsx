@@ -44,7 +44,7 @@ export default function WhyJaggeryPage() {
             ))}
             <Link
               href="/products"
-              className="inline-flex rounded-full bg-guric-green px-6 py-3 text-sm font-semibold text-white"
+              className="inline-flex min-h-[48px] items-center justify-center rounded-full bg-guric-green px-6 py-3 text-sm font-semibold text-white"
             >
               Shop Our Range
             </Link>

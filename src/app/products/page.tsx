@@ -37,7 +37,7 @@ export default function ProductsPage() {
             Each jar is enriched with real buffalo ghee — 100% natural, chemical-free, no added sugar.
           </p>
         </div>
-        <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
+        <div className="product-grid mt-8">
           {productLineupSlugs.map((slug) => {
             const product = products.find((p) => p.slug === slug);
             return product ? <ProductCard key={product.slug} product={product} /> : null;
@@ -46,7 +46,7 @@ export default function ProductsPage() {
         <div className="mt-14">
           <h2 className="font-display text-xl font-bold text-guric-green">More from Guric</h2>
         </div>
-        <div className="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-6 grid grid-cols-1 gap-5 sm:grid-cols-2 sm:gap-6">
           {products
             .filter((p) => !productLineupSlugs.includes(p.slug as (typeof productLineupSlugs)[number]))
             .map((product) => (

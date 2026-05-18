@@ -1,35 +1,34 @@
 import nodemailer from "nodemailer";
 import { siteConfig } from "@/data/site";
+import type { EnquiryPayload } from "@/lib/email-types";
 
-export interface EnquiryPayload {
-  name: string;
-  contact: string;
-  message: string;
+export type { EnquiryPayload } from "@/lib/email-types";
+
+function escapeHtml(str: string) {
+  return str
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;");
 }
 
-function getTransporter() {
+async function sendViaSmtp(payload: EnquiryPayload) {
   const user = process.env.SMTP_USER;
   const pass = process.env.SMTP_PASS;
 
   if (!user || !pass) {
-    throw new Error(
-      "Email is not configured. Set SMTP_USER and SMTP_PASS in your environment variables.",
-    );
+    throw new Error("SMTP credentials are not configured.");
   }
 
-  return nodemailer.createTransport({
+  const to = process.env.CONTACT_TO_EMAIL ?? siteConfig.email;
+  const from = process.env.SMTP_FROM ?? user;
+
+  const transporter = nodemailer.createTransport({
     host: process.env.SMTP_HOST ?? "smtp.gmail.com",
     port: Number(process.env.SMTP_PORT ?? 465),
     secure: process.env.SMTP_SECURE !== "false",
     auth: { user, pass },
   });
-}
-
-export async function sendEnquiryEmail(payload: EnquiryPayload) {
-  const to = process.env.CONTACT_TO_EMAIL ?? siteConfig.email;
-  const from = process.env.SMTP_FROM ?? process.env.SMTP_USER;
-
-  const transporter = getTransporter();
 
   const replyTo = payload.contact.includes("@") ? payload.contact : undefined;
 
@@ -68,10 +67,48 @@ export async function sendEnquiryEmail(payload: EnquiryPayload) {
   });
 }
 
-function escapeHtml(str: string) {
-  return str
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;");
+async function sendViaWeb3Forms(payload: EnquiryPayload) {
+  const accessKey = process.env.WEB3FORMS_ACCESS_KEY;
+  if (!accessKey) {
+    throw new Error("Web3Forms access key is not configured.");
+  }
+
+  const isEmail = payload.contact.includes("@");
+
+  const response = await fetch("https://api.web3forms.com/submit", {
+    method: "POST",
+    headers: { "Content-Type": "application/json", Accept: "application/json" },
+    body: JSON.stringify({
+      access_key: accessKey,
+      subject: `New enquiry from ${payload.name} — Guric`,
+      from_name: payload.name,
+      name: payload.name,
+      email: isEmail ? payload.contact : siteConfig.email,
+      phone: isEmail ? undefined : payload.contact,
+      message: payload.message,
+      botcheck: false,
+    }),
+  });
+
+  const result = (await response.json()) as { success?: boolean; message?: string };
+
+  if (!response.ok || !result.success) {
+    throw new Error(result.message ?? "Failed to send enquiry via Web3Forms.");
+  }
+}
+
+export async function sendEnquiryEmail(payload: EnquiryPayload) {
+  if (process.env.SMTP_USER && process.env.SMTP_PASS) {
+    await sendViaSmtp(payload);
+    return;
+  }
+
+  if (process.env.WEB3FORMS_ACCESS_KEY) {
+    await sendViaWeb3Forms(payload);
+    return;
+  }
+
+  throw new Error(
+    "Email is not configured. Set SMTP_USER/SMTP_PASS or WEB3FORMS_ACCESS_KEY in environment variables.",
+  );
 }

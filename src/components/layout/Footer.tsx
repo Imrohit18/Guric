@@ -7,7 +7,7 @@ export function Footer() {
   return (
     <footer className="border-t border-guric-cream-dark bg-guric-brown text-guric-cream">
       <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8">
-        <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-4">
+        <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
           <div className="lg:col-span-1">
             <Logo className="[&_span]:text-guric-cream [&_span:last-child]:text-guric-cream/70" />
             <p className="mt-4 max-w-xs text-sm leading-relaxed text-guric-cream/80">
@@ -17,7 +17,7 @@ export function Footer() {
               href={siteConfig.social.facebook}
               target="_blank"
               rel="noopener noreferrer"
-              className="mt-6 inline-flex items-center gap-2 rounded-full border border-guric-cream/30 bg-guric-cream/10 px-4 py-2 text-sm font-medium text-guric-cream transition hover:border-guric-cream/50 hover:bg-guric-cream/20 hover:text-white"
+              className="mt-6 inline-flex w-full max-w-xs items-center justify-center gap-2 rounded-full border border-guric-cream/30 bg-guric-cream/10 px-4 py-2.5 text-sm font-medium text-guric-cream transition hover:border-guric-cream/50 hover:bg-guric-cream/20 hover:text-white sm:w-auto sm:justify-start"
               aria-label="Follow Guric on Facebook"
             >
               <FacebookIcon />
