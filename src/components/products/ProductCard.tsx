@@ -6,12 +6,19 @@ import { categoryLabels, tierLabels } from "@/data/products";
 export function ProductCard({ product }: { product: Product }) {
   return (
     <article className="group flex flex-col overflow-hidden rounded-2xl border border-guric-cream-dark bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-lg">
-      <Link href={`/products/${product.slug}`} className="relative block aspect-[4/3] overflow-hidden bg-guric-cream">
+      <Link
+        href={`/products/${product.slug}`}
+        className="relative block aspect-[4/3] overflow-hidden bg-gradient-to-b from-guric-cream to-white"
+      >
         <Image
           src={product.image}
           alt={product.name}
           fill
-          className="object-cover object-center transition duration-500 group-hover:scale-105"
+          className={`transition duration-500 group-hover:scale-105 ${
+            product.image.includes("-jar")
+              ? "object-contain object-bottom p-3"
+              : "object-cover object-center"
+          }`}
           sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
         />
         {product.badge && (

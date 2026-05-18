@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { ProductCard } from "@/components/products/ProductCard";
+import { ProductLineup } from "@/components/products/ProductLineup";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { getFeaturedProducts } from "@/data/products";
 
@@ -11,10 +12,11 @@ export function FeaturedProducts() {
       <div className="mx-auto max-w-7xl">
         <SectionHeading
           eyebrow="Our Range"
-          title="From Classic to Signature Premium"
-          description="Jaggery powder, handmade cubes, desi ghee, chocolate, and flavoured cubes — something for every table."
+          title="Our Jaggery Products"
+          description="Nature's sweetness, pure & wholesome — powder, chocolate ghee, adrak ghee, ilaichi ghee, and desi ghee cubes."
         />
-        <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        <ProductLineup />
+        <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
           {featured.map((product) => (
             <ProductCard key={product.slug} product={product} />
           ))}

@@ -119,7 +119,6 @@ export const products: Product[] = [
     nutrition: cubeNutrition,
     storage:
       "Store in a cool, dry, hygienic place. Once opened, store in an airtight container.",
-    featured: true,
   },
   {
     slug: "desi-ghee-jaggery-cubes",
@@ -132,7 +131,7 @@ export const products: Product[] = [
     category: "ghee",
     tier: "premium",
     tagline: "Real Buffalo Ghee Used",
-    image: "/images/label-desi-ghee-cubes.png",
+    image: "/images/product-desi-ghee-jar.png",
     labelImage: "/images/label-desi-ghee-cubes.png",
     accentColor: "#8B2635",
     badge: "Premium",
@@ -150,16 +149,16 @@ export const products: Product[] = [
   },
   {
     slug: "chocolate-jaggery-cubes",
-    name: "Chocolate Jaggery Cubes",
-    hindiName: "चॉकलेट गुड़",
+    name: "Chocolate Ghee Jaggery Cubes",
+    hindiName: "चॉकलेट घी गुड़",
     shortDescription:
-      "India's unique fusion — real cocoa powder infused with pure jaggery cubes.",
+      "Rich chocolate meets pure jaggery and real buffalo ghee — guilt-free indulgence in every cube.",
     description:
-      "A Guric signature innovation: rich cocoa meets traditional jaggery. Guilt-free chocolate sweetness without refined sugar — perfect for kids and chocolate lovers seeking a healthier alternative.",
+      "A Guric signature innovation: real cocoa and desi ghee blended with traditional jaggery cubes. Guilt-free chocolate sweetness without refined sugar — perfect for kids and chocolate lovers.",
     category: "chocolate",
     tier: "signature",
-    tagline: "Real Cocoa Powder Infused",
-    image: "/images/label-chocolate-cubes.png",
+    tagline: "Real Buffalo Ghee Used",
+    image: "/images/product-chocolate-ghee-jar.png",
     labelImage: "/images/label-chocolate-cubes.png",
     accentColor: "#5C2D82",
     badge: "Signature",
@@ -183,22 +182,22 @@ export const products: Product[] = [
   },
   {
     slug: "adhark-jaggery-cubes",
-    name: "Adhark (Ginger) Jaggery Cubes",
-    hindiName: "अदरक गुड़",
+    name: "Adrak Ghee Jaggery Cubes",
+    hindiName: "अदरक घी गुड़",
     shortDescription:
-      "Warming ginger-infused jaggery cubes — Ayurvedic comfort in every bite.",
+      "Warming adrak and real buffalo ghee in every cube — Ayurvedic comfort with pure sweetness.",
     description:
-      "Blending the warmth of adrak (ginger) with pure jaggery, these flavoured cubes aid digestion and add a spicy-sweet note to your tea, milk, or winter wellness routine.",
+      "Blending fresh adrak (ginger) and real buffalo ghee with pure jaggery. These cubes aid digestion and add a spicy-sweet note to your tea, milk, or winter wellness routine.",
     category: "flavored",
     tier: "premium",
-    tagline: "Warmth of Ginger, Sweetness of Gur",
-    image: "/images/label-handmade-cubes.png",
-    accentColor: "#C45C26",
+    tagline: "Real Buffalo Ghee Used",
+    image: "/images/product-adrak-ghee-jar.png",
+    accentColor: "#C9A227",
     badge: "Flavoured",
     ingredients: [
       "Concentrated Sugarcane Juice",
       "Ghee",
-      "Natural Ginger Extract",
+      "Natural Ginger",
     ],
     uses: [
       "Ideal with ginger tea & kahwa",
@@ -214,25 +213,26 @@ export const products: Product[] = [
     nutrition: cubeNutrition,
     storage:
       "Store in a cool, dry, hygienic place. Once opened, store in an airtight container.",
+    featured: true,
   },
   {
     slug: "ilaychi-jaggery-cubes",
-    name: "Ilaychi (Cardamom) Jaggery Cubes",
-    hindiName: "इलायची गुड़",
+    name: "Ilaichi Ghee Jaggery Cubes",
+    hindiName: "इलायची घी गुड़",
     shortDescription:
-      "Aromatic cardamom jaggery cubes — festive flavour with pure sweetness.",
+      "Fragrant ilaichi and real buffalo ghee with pure jaggery — festive aroma in every bite.",
     description:
-      "Fragrant ilaychi (cardamom) meets traditional jaggery for an aromatic treat. Perfect for festive sweets, masala chai, and premium gifting.",
+      "Fragrant ilaichi (cardamom) and real buffalo ghee meet traditional jaggery for an aromatic treat. Perfect for festive sweets, masala chai, and premium gifting.",
     category: "flavored",
     tier: "premium",
-    tagline: "Aromatic Cardamom Bliss",
-    image: "/images/label-handmade-cubes.png",
+    tagline: "Real Buffalo Ghee Used",
+    image: "/images/product-ilaichi-ghee-jar.png",
     accentColor: "#2D6A4F",
     badge: "Flavoured",
     ingredients: [
       "Concentrated Sugarcane Juice",
       "Ghee",
-      "Natural Cardamom",
+      "Natural Cardamom (Ilaichi)",
     ],
     uses: [
       "Perfect with masala chai & desserts",
@@ -248,8 +248,18 @@ export const products: Product[] = [
     nutrition: cubeNutrition,
     storage:
       "Store in a cool, dry, hygienic place. Once opened, store in an airtight container.",
+    featured: true,
   },
 ];
+
+/** Order shown in combined lineup banner (left → right) */
+export const productLineupSlugs = [
+  "organic-jaggery-powder",
+  "chocolate-jaggery-cubes",
+  "adhark-jaggery-cubes",
+  "ilaychi-jaggery-cubes",
+  "desi-ghee-jaggery-cubes",
+] as const;
 
 export const categoryLabels: Record<ProductCategory, string> = {
   powder: "Jaggery Powder",
@@ -270,5 +280,7 @@ export function getProductBySlug(slug: string): Product | undefined {
 }
 
 export function getFeaturedProducts(): Product[] {
-  return products.filter((p) => p.featured);
+  return productLineupSlugs
+    .map((slug) => products.find((p) => p.slug === slug))
+    .filter((p): p is Product => p !== undefined);
 }
