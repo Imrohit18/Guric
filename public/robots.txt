@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://guric.in/sitemap.xml
